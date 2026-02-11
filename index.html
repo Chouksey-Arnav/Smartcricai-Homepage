@@ -19,8 +19,32 @@
         .pulse { animation: pulse 2s ease-in-out infinite; }
         .glow { animation: glow 3s ease-in-out infinite; }
         
-        [apple-fade] { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
+        /* INFINITE FADE ANIMATIONS - ALWAYS WORKING */
+        [apple-fade] { opacity: 0.8; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         [apple-fade].visible { opacity: 1; transform: translateY(0); }
+        
+        /* Also support class-based apple-fade */
+        .apple-fade { 
+            opacity: 0.1;  /* EXTREME - only 10% visible! */
+            transform: translateY(80px);  /* HUGE movement! */
+            transition: opacity 1.5s ease-out,
+                        transform 1.5s ease-out;
+            will-change: opacity, transform;
+        }
+        .apple-fade.visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        
+        /* ENHANCED HOVER EFFECTS - POP OUT! */
+        .hover-pop {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .hover-pop:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 15px 35px rgba(34, 197, 94, 0.4);
+            z-index: 10;
+        }
         
         .gradient-text {
           background: linear-gradient(135deg, #10b981 0%, #22c55e 50%, #34d399 100%);
@@ -87,7 +111,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+    <section class="apple-fade relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-emerald-500/10"></div>
         <div class="absolute inset-0 opacity-30">
             <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-green-500/30 rounded-full blur-3xl float"></div>
@@ -194,7 +218,7 @@
 
     <!-- THIS CONTINUES IN NEXT FILE DUE TO LENGTH... -->
     <!-- AI Coach Section WITH CLAUDE BRANDING & COMING SOON -->
-    <section id="ai-coach" apple-fade class="py-40 px-6 relative">
+    <section id="ai-coach" class="apple-fade py-40 px-6 relative">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-green-500/5 to-transparent"></div>
         <div class="max-w-7xl mx-auto relative">
             <div class="text-center mb-20">
@@ -324,7 +348,7 @@
         </div>
     </section>
 
-<section id="youtube-finder" apple-fade class="py-40 px-6 relative bg-gradient-to-b from-transparent via-red-500/5 to-transparent">
+<section id="youtube-finder" class="apple-fade py-40 px-6 relative bg-gradient-to-b from-transparent via-red-500/5 to-transparent">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <div class="inline-flex items-center gap-3 bg-red-500/10 border border-red-500/20 rounded-full px-6 py-3 mb-8">
@@ -340,7 +364,7 @@
                     <span class="gradient-text text-shadow-glow">Drill Finder</span>
                 </h2>
                 <p class="text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed">
-                    Find the perfect drill video instantly. Our AI searches YouTube for the exact cricket training video you need, curated just for you.
+                    Find precise YouTube video URLs for any cricket drill or exercise. Whether it's batting, bowling, fielding, fitness, or specific exercises you want to learn, our system helps you discover the exact videos you need.
                 </p>
             </div>
 
@@ -350,21 +374,19 @@
                     <div class="relative">
                         <input 
                             type="text" 
-                            placeholder="e.g., cover drive technique, yorker bowling, slip catching..."
+                            placeholder="Search: cover drive, squat form, yorker bowling, agility drills..."
                             class="w-full px-6 py-5 bg-white/5 border-2 border-white/10 rounded-2xl focus:border-red-500 focus:outline-none transition-all text-white text-lg hover-glow"
-                            disabled
+                            readonly
                         />
-                        <button 
-                            class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-red-500 to-red-600 px-8 py-3 rounded-xl font-bold opacity-50 cursor-not-allowed"
-                        >
-                            Coming Soon
-                        </button>
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-red-500 to-red-600 px-8 py-3 rounded-xl font-bold">
+                            Find Videos
+                        </div>
                     </div>
-                    <p class="text-center text-red-300/70 text-sm mt-4">🚀 Feature preview - Full functionality coming soon!</p>
+                    <p class="text-center text-white/60 text-sm mt-4">💡 Search any drill, technique, or exercise to find precise YouTube URLs</p>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div class="bg-white/5 rounded-2xl p-6 hover-lift">
+                    <div class="bg-white/5 rounded-2xl p-6 hover-pop">
                         <h4 class="font-bold text-lg mb-4 flex items-center gap-2">
                             <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -379,7 +401,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white/5 rounded-2xl p-6 hover-lift">
+                    <div class="bg-white/5 rounded-2xl p-6 hover-pop">
                         <h4 class="font-bold text-lg mb-4 flex items-center gap-2">
                             <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
@@ -394,7 +416,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white/5 rounded-2xl p-6 hover-lift">
+                    <div class="bg-white/5 rounded-2xl p-6 hover-pop">
                         <h4 class="font-bold text-lg mb-4 flex items-center gap-2">
                             <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"/>
@@ -409,7 +431,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white/5 rounded-2xl p-6 hover-lift">
+                    <div class="bg-white/5 rounded-2xl p-6 hover-pop">
                         <h4 class="font-bold text-lg mb-4 flex items-center gap-2">
                             <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/>
@@ -423,6 +445,21 @@
                             <div class="block w-full text-left p-2 rounded opacity-60">• Flexibility Work</div>
                         </div>
                     </div>
+
+                    <div class="bg-white/5 rounded-2xl p-6 hover-pop">
+                        <h4 class="font-bold text-lg mb-4 flex items-center gap-2">
+                            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            Exercise Form
+                        </h4>
+                        <div class="space-y-2 text-sm text-white/70">
+                            <div class="block w-full text-left p-2 rounded opacity-60">• Squat Technique</div>
+                            <div class="block w-full text-left p-2 rounded opacity-60">• Deadlift Form</div>
+                            <div class="block w-full text-left p-2 rounded opacity-60">• Push-up Variations</div>
+                            <div class="block w-full text-left p-2 rounded opacity-60">• Core Exercises</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="videoResults" style="display: none;" class="mt-12">
@@ -433,7 +470,7 @@
         </div>
     </section>
 
-<section id="drill-library" apple-fade class="py-40 px-6 relative">
+<section id="drill-library" class="apple-fade py-40 px-6 relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <div class="inline-flex items-center gap-3 bg-green-500/10 border border-green-500/20 rounded-full px-6 py-3 mb-8">
@@ -524,7 +561,7 @@
         </div>
     </section>
 
-<section id="fitness" class="py-40 px-6 relative">
+<section id="fitness" class="apple-fade py-40 px-6 relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <div class="inline-flex items-center gap-3 bg-orange-500/10 border border-orange-500/20 rounded-full px-6 py-3 mb-8">
@@ -634,7 +671,7 @@
         </div>
     </section>
 
-<section id="mental-creator" class="py-40 px-6 relative">
+<section id="mental-creator" class="apple-fade py-40 px-6 relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <div class="inline-flex items-center gap-3 bg-purple-500/10 border border-purple-500/20 rounded-full px-6 py-3 mb-8">
@@ -761,7 +798,7 @@
         </div>
     </section>
 
-<section id="quizzes" class="py-40 px-6 relative">
+<section id="quizzes" class="apple-fade py-40 px-6 relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <div class="inline-flex items-center gap-3 bg-red-500/10 border border-red-500/20 rounded-full px-6 py-3 mb-8">
@@ -824,7 +861,7 @@
         </div>
     </section>
 
-<section id="schedule" class="py-40 px-6 relative">
+<section id="schedule" class="apple-fade py-40 px-6 relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <div class="inline-flex items-center gap-3 bg-blue-500/10 border border-blue-500/20 rounded-full px-6 py-3 mb-8">
@@ -925,7 +962,7 @@
         </div>
     </section>
 
-<section id="minimatch" apple-fade class="py-40 px-6 relative">
+<section id="minimatch" class="apple-fade py-40 px-6 relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <div class="inline-flex items-center gap-3 bg-blue-500/10 border border-blue-500/20 rounded-full px-6 py-3 mb-8">
@@ -1000,7 +1037,7 @@
         </div>
     </section>
 
-<section id="analysis" apple-fade class="py-40 px-6 relative">
+<section id="analysis" class="apple-fade py-40 px-6 relative">
         <div class="max-w-7xl mx-auto">
             <div class="grid lg:grid-cols-2 gap-12">
                 <!-- Why Did I Get Out -->
@@ -1082,7 +1119,7 @@
         </div>
     </section>
 
-<section id="mental" apple-fade class="py-40 px-6 relative">
+<section id="mental" class="apple-fade py-40 px-6 relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <div class="inline-flex items-center gap-3 bg-purple-500/10 border border-purple-500/20 rounded-full px-6 py-3 mb-8">
@@ -1556,129 +1593,7 @@
     </section>
 
     <!-- 90-DAY CHALLENGE (PREMIUM - COMING SOON) -->
-    <section id="challenge-90-premium" class="apple-fade py-40 px-6 relative bg-gradient-to-b from-transparent via-purple-500/10 to-transparent">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20">
-                <div class="inline-flex items-center gap-3 bg-purple-500/20 border-2 border-purple-500/40 rounded-full px-6 py-3 mb-8 animate-pulse">
-                    <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
-                    </svg>
-                    <span class="text-sm font-bold text-purple-300 tracking-wider">COMING SOON • PREMIUM EXCLUSIVE</span>
-                </div>
-                <h2 class="text-7xl md:text-8xl font-black mb-8 leading-none">
-                    SmartCrick 90-Day
-                    <br />
-                    <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent text-shadow-glow">Challenge Architect</span>
-                </h2>
-                <p class="text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed mb-6">
-                    The world's most advanced AI cricket performance director. We don't train athletes. <span class="font-bold text-white">We build elite performers.</span>
-                </p>
-                <div class="inline-flex items-center gap-3 bg-yellow-500/20 border-2 border-yellow-500/40 rounded-full px-6 py-3">
-                    <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                    </svg>
-                    <span class="text-sm font-bold text-yellow-300">YEARLY & LIFETIME PLANS ONLY</span>
-                </div>
-            </div>
-
-            <div class="glass-strong rounded-3xl p-12 max-w-7xl mx-auto border-2 border-purple-500/30">
-                <div class="text-center mb-12">
-                    <h3 class="text-4xl font-black mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Combined Expertise of 5 Elite Specialists</h3>
-                    <p class="text-xl text-white/80 max-w-3xl mx-auto">
-                        The 90-Day Challenge Architect possesses the combined knowledge of a master technical coach, high-performance strength & conditioning expert, sports psychologist, tactical analyst, and mental performance coach.
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-6 mb-12">
-                    <div class="bg-gradient-to-br from-purple-500/20 to-purple-600/20 rounded-2xl p-8 border-2 border-purple-500/40 hover:scale-105 transition-all">
-                        <div class="w-16 h-16 bg-purple-500/30 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                            <span class="text-4xl">🎯</span>
-                        </div>
-                        <h4 class="text-2xl font-bold text-purple-300 mb-4 text-center">30-Day Sprint</h4>
-                        <p class="text-white/70 text-center text-sm mb-4">Intensive 30-day transformation block for rapid skill acquisition and performance gains</p>
-                        <div class="bg-purple-500/10 rounded-lg p-3 border border-purple-500/20">
-                            <p class="text-xs text-purple-200 text-center">✓ Included in 90-Day program</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-gradient-to-br from-pink-500/20 to-pink-600/20 rounded-2xl p-8 border-2 border-pink-500/40 hover:scale-105 transition-all">
-                        <div class="w-16 h-16 bg-pink-500/30 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                            <span class="text-4xl">🚀</span>
-                        </div>
-                        <h4 class="text-2xl font-bold text-pink-300 mb-4 text-center">60-Day Development</h4>
-                        <p class="text-white/70 text-center text-sm mb-4">Comprehensive development blocks for mastering techniques and building consistency</p>
-                        <div class="bg-pink-500/10 rounded-lg p-3 border border-pink-500/20">
-                            <p class="text-xs text-pink-200 text-center">✓ Included in 90-Day program</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-purple-500/20 rounded-2xl p-8 border-2 border-purple-500/40 hover:scale-105 transition-all relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-gradient-to-br from-yellow-400 to-yellow-500 text-black px-3 py-1 rounded-bl-xl text-xs font-black">
-                            ULTIMATE
-                        </div>
-                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                            <span class="text-4xl">👑</span>
-                        </div>
-                        <h4 class="text-2xl font-bold bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-4 text-center">90-Day Mastery</h4>
-                        <p class="text-white/70 text-center text-sm mb-4">Complete elite transformation program combining all sprints for championship-level performance</p>
-                        <div class="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg p-3 border border-purple-500/30">
-                            <p class="text-xs text-purple-200 text-center font-bold">✨ The Complete Journey</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20 rounded-2xl p-10 border-2 border-purple-500/40 text-center">
-                    <h4 class="text-3xl font-black mb-6 text-white">What Makes This Different?</h4>
-                    <div class="grid md:grid-cols-2 gap-6 text-left">
-                        <div class="flex items-start gap-4">
-                            <svg class="w-6 h-6 text-purple-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                            </svg>
-                            <div>
-                                <p class="font-bold text-white mb-1">Adaptive Intelligence</p>
-                                <p class="text-sm text-white/70">Adjusts to your progress, setbacks, and performance in real-time</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <svg class="w-6 h-6 text-pink-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            <div>
-                                <p class="font-bold text-white mb-1">Holistic Development</p>
-                                <p class="text-sm text-white/70">Technical, physical, tactical, and mental training in perfect harmony</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <svg class="w-6 h-6 text-purple-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                            </svg>
-                            <div>
-                                <p class="font-bold text-white mb-1">Performance Analytics</p>
-                                <p class="text-sm text-white/70">Deep insights into your development trajectory and areas for optimization</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <svg class="w-6 h-6 text-pink-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            <div>
-                                <p class="font-bold text-white mb-1">Elite-Level Periodization</p>
-                                <p class="text-sm text-white/70">Scientific training cycles used by professional athletes worldwide</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl p-8 hover-lift">
-                        <p class="text-white font-black text-2xl mb-3">🎊 COMING SOON TO PREMIUM MEMBERS</p>
-                        <p class="text-white/90 text-lg mb-4">Exclusive to Yearly and Lifetime plan holders</p>
-                        <p class="text-white/70 text-sm">This elite-level training program will revolutionize your cricket development. Stay tuned!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<section id="head-coach" class="py-40 px-6 relative bg-gradient-to-b from-transparent via-purple-500/5 to-transparent">
+<section id="head-coach" class="apple-fade py-40 px-6 relative bg-gradient-to-b from-transparent via-purple-500/5 to-transparent">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <div class="inline-flex items-center gap-3 bg-purple-500/10 border border-purple-500/20 rounded-full px-6 py-3 mb-8">
@@ -1893,7 +1808,135 @@
         </div>
     </section>
 
-<section id="all-features" class="py-40 px-6 relative bg-gradient-to-b from-transparent via-green-500/5 to-transparent">
+    
+
+
+
+
+    <section id="challenge-90-premium" class="apple-fade py-40 px-6 relative bg-gradient-to-b from-transparent via-purple-500/10 to-transparent">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <div class="inline-flex items-center gap-3 bg-purple-500/20 border-2 border-purple-500/40 rounded-full px-6 py-3 mb-8 animate-pulse">
+                    <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                    </svg>
+                    <span class="text-sm font-bold text-purple-300 tracking-wider">COMING SOON • PREMIUM EXCLUSIVE</span>
+                </div>
+                <h2 class="text-7xl md:text-8xl font-black mb-8 leading-none">
+                    SmartCrick 90-Day
+                    <br />
+                    <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent text-shadow-glow">Challenge Architect</span>
+                </h2>
+                <p class="text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed mb-6">
+                    The world's most advanced AI cricket performance director. We don't train athletes. <span class="font-bold text-white">We build elite performers.</span>
+                </p>
+                <div class="inline-flex items-center gap-3 bg-yellow-500/20 border-2 border-yellow-500/40 rounded-full px-6 py-3">
+                    <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    <span class="text-sm font-bold text-yellow-300">YEARLY & LIFETIME PLANS ONLY</span>
+                </div>
+            </div>
+
+            <div class="glass-strong rounded-3xl p-12 max-w-7xl mx-auto border-2 border-purple-500/30">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-black mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Combined Expertise of 5 Elite Specialists</h3>
+                    <p class="text-xl text-white/80 max-w-3xl mx-auto">
+                        The 90-Day Challenge Architect possesses the combined knowledge of a master technical coach, high-performance strength & conditioning expert, sports psychologist, tactical analyst, and mental performance coach.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-12">
+                    <div class="bg-gradient-to-br from-purple-500/20 to-purple-600/20 rounded-2xl p-8 border-2 border-purple-500/40 hover:scale-105 transition-all">
+                        <div class="w-16 h-16 bg-purple-500/30 rounded-xl flex items-center justify-center mb-6 mx-auto">
+                            <span class="text-4xl">🎯</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-purple-300 mb-4 text-center">30-Day Sprint</h4>
+                        <p class="text-white/70 text-center text-sm mb-4">Intensive 30-day transformation block for rapid skill acquisition and performance gains</p>
+                        <div class="bg-purple-500/10 rounded-lg p-3 border border-purple-500/20">
+                            <p class="text-xs text-purple-200 text-center">✓ Included in 90-Day program</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-pink-500/20 to-pink-600/20 rounded-2xl p-8 border-2 border-pink-500/40 hover:scale-105 transition-all">
+                        <div class="w-16 h-16 bg-pink-500/30 rounded-xl flex items-center justify-center mb-6 mx-auto">
+                            <span class="text-4xl">🚀</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-pink-300 mb-4 text-center">60-Day Development</h4>
+                        <p class="text-white/70 text-center text-sm mb-4">Comprehensive development blocks for mastering techniques and building consistency</p>
+                        <div class="bg-pink-500/10 rounded-lg p-3 border border-pink-500/20">
+                            <p class="text-xs text-pink-200 text-center">✓ Included in 90-Day program</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-purple-500/20 rounded-2xl p-8 border-2 border-purple-500/40 hover:scale-105 transition-all relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-gradient-to-br from-yellow-400 to-yellow-500 text-black px-3 py-1 rounded-bl-xl text-xs font-black">
+                            ULTIMATE
+                        </div>
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-xl flex items-center justify-center mb-6 mx-auto">
+                            <span class="text-4xl">👑</span>
+                        </div>
+                        <h4 class="text-2xl font-bold bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-4 text-center">90-Day Mastery</h4>
+                        <p class="text-white/70 text-center text-sm mb-4">Complete elite transformation program combining all sprints for championship-level performance</p>
+                        <div class="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg p-3 border border-purple-500/30">
+                            <p class="text-xs text-purple-200 text-center font-bold">✨ The Complete Journey</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20 rounded-2xl p-10 border-2 border-purple-500/40 text-center">
+                    <h4 class="text-3xl font-black mb-6 text-white">What Makes This Different?</h4>
+                    <div class="grid md:grid-cols-2 gap-6 text-left">
+                        <div class="flex items-start gap-4">
+                            <svg class="w-6 h-6 text-purple-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                            <div>
+                                <p class="font-bold text-white mb-1">Adaptive Intelligence</p>
+                                <p class="text-sm text-white/70">Adjusts to your progress, setbacks, and performance in real-time</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <svg class="w-6 h-6 text-pink-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <div>
+                                <p class="font-bold text-white mb-1">Holistic Development</p>
+                                <p class="text-sm text-white/70">Technical, physical, tactical, and mental training in perfect harmony</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <svg class="w-6 h-6 text-purple-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                            <div>
+                                <p class="font-bold text-white mb-1">Performance Analytics</p>
+                                <p class="text-sm text-white/70">Deep insights into your development trajectory and areas for optimization</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <svg class="w-6 h-6 text-pink-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <div>
+                                <p class="font-bold text-white mb-1">Elite-Level Periodization</p>
+                                <p class="text-sm text-white/70">Scientific training cycles curated just for you</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl p-8 hover-lift">
+                        <p class="text-white font-black text-2xl mb-3">🎊 COMING SOON TO PREMIUM MEMBERS</p>
+                        <p class="text-white/90 text-lg mb-4">Exclusive to Yearly and Lifetime plan holders</p>
+                        <p class="text-white/70 text-sm">This elite-level training program will revolutionize your cricket development. Stay tuned!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<section id="all-features" class="apple-fade py-40 px-6 relative bg-gradient-to-b from-transparent via-green-500/5 to-transparent">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <div class="inline-flex items-center gap-3 bg-green-500/10 border border-green-500/20 rounded-full px-6 py-3 mb-8">
@@ -1922,7 +1965,7 @@
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <span>Voice Coach Mode (Coming Soon)</span>
+                            <span>Voice Coach Mode (Find Videos)</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -2135,7 +2178,7 @@
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <span>30, 60, 90-day programs (Coming Soon)</span>
+                            <span>30, 60, 90-day programs (Find Videos)</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -2184,7 +2227,7 @@
         </div>
     </section>
 
-<section id="pricing" apple-fade class="py-40 px-6 relative overflow-hidden">
+<section id="pricing" class="apple-fade py-40 px-6 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-green-500/5 to-transparent"></div>
         <div class="max-w-7xl mx-auto relative">
             <div class="text-center mb-20">
@@ -2355,14 +2398,14 @@
         </div>
     </section>
 
-    <!-- More Features Coming Soon -->
+    <!-- More Features Find Videos -->
     <section class="py-20 px-6 relative bg-gradient-to-b from-green-500/10 to-transparent">
         <div class="max-w-4xl mx-auto text-center">
             <div class="glass-strong rounded-3xl p-12">
                 <svg class="w-20 h-20 text-green-400 mx-auto mb-6 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                 </svg>
-                <h2 class="text-5xl font-black mb-6 gradient-text">More Features Coming Soon!</h2>
+                <h2 class="text-5xl font-black mb-6 gradient-text">More Features Find Videos!</h2>
                 <p class="text-2xl text-white/70 mb-8 leading-relaxed">
                     We're constantly innovating and building new tools to help you become the best cricketer you can be.
                 </p>
@@ -2414,7 +2457,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        <p class="text-2xl font-bold text-white mb-2">Demo Video Coming Soon!</p>
+                        <p class="text-2xl font-bold text-white mb-2">Demo Video Find Videos!</p>
                         <p class="text-white/60 text-lg">We're creating an amazing demo to show you everything Smart Crick AI can do.</p>
                     </div>
                 </div>
@@ -2513,7 +2556,7 @@
                         </div>
                     </div>
 
-                    <button onclick="handleContinue()" id="continueBtn" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-4 rounded-xl font-bold hover:from-green-600 hover:to-emerald-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-lg" disabled>
+                    <button onclick="handleContinue()" id="continueBtn" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-4 rounded-xl font-bold hover:from-green-600 hover:to-emerald-700 transition-all readonly:opacity-50 readonly:cursor-not-allowed text-lg" readonly>
                         Continue
                     </button>
                 </div>
@@ -2546,7 +2589,7 @@
                         <span class="text-white/70">
                             Time: <span id="timerDisplay" class="font-black text-green-400">60s</span>
                         </span>
-                        <button onclick="handleResend()" id="resendBtn" class="font-bold text-white/40 cursor-not-allowed" disabled>
+                        <button onclick="handleResend()" id="resendBtn" class="font-bold text-white/40 cursor-not-allowed" readonly>
                             Resend Email Code
                         </button>
                     </div>
@@ -2591,7 +2634,7 @@
             const originalHTML = button.innerHTML;
             
             try {
-                button.disabled = true;
+                button.readonly = true;
                 button.innerHTML = '<div class="spinner mx-auto"></div>';
                 
                 console.log(`Creating ${planType} checkout session for:`, userEmail);
@@ -2620,7 +2663,7 @@
             } catch (error) {
                 console.error('❌ Payment Error:', error);
                 alert('Payment initialization failed. Please try again.');
-                button.disabled = false;
+                button.readonly = false;
                 button.innerHTML = originalHTML;
             }
         }
@@ -2643,17 +2686,28 @@
 
         // Fade-in effect with DOMContentLoaded to ensure visibility
         document.addEventListener('DOMContentLoaded', () => {
+            // Fade animations that work BOTH WAYS - INFINITELY!
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
+                        // Fading IN when scrolling into view
                         entry.target.classList.add('visible');
+                    } else {
+                        // Fading OUT when scrolling away - allows infinite re-animation!
+                        entry.target.classList.remove('visible');
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { 
+                threshold: 0.001,  // Trigger very early - when just 1% visible
+                rootMargin: '0px'  // No margin adjustment
+            });
 
-            document.querySelectorAll('[apple-fade]').forEach(el => {
+            // Apply to ALL elements with apple-fade class
+            document.querySelectorAll('.apple-fade').forEach(el => {
                 observer.observe(el);
             });
+
+            console.log('✨ Infinite fade animations activated!');
         });
 
         function openVideoModal() {
@@ -2729,10 +2783,10 @@
                     }
                 });
                 
-                document.getElementById('continueBtn').disabled = !(allMet && email);
+                document.getElementById('continueBtn').readonly = !(allMet && email);
             } else {
                 document.getElementById('passwordRules').style.display = 'none';
-                document.getElementById('continueBtn').disabled = !(email && pwd);
+                document.getElementById('continueBtn').readonly = !(email && pwd);
             }
             
             password = pwd;
@@ -2743,7 +2797,7 @@
             password = document.getElementById('password').value;
             
             if (authMode === 'login') {
-                document.getElementById('continueBtn').disabled = !(email && password);
+                document.getElementById('continueBtn').readonly = !(email && password);
             } else {
                 const rules = [
                     password.length >= 8,
@@ -2753,7 +2807,7 @@
                     /[!@#$%^&*]/.test(password)
                 ];
                 const allMet = rules.every(r => r);
-                document.getElementById('continueBtn').disabled = !(allMet && email);
+                document.getElementById('continueBtn').readonly = !(allMet && email);
             }
         });
 
@@ -2773,7 +2827,7 @@
             const continueBtn = document.getElementById('continueBtn');
             const originalText = continueBtn.textContent;
             continueBtn.textContent = 'Sending OTP...';
-            continueBtn.disabled = true;
+            continueBtn.readonly = true;
             
             try {
                 console.log('📤 Sending POST request...');
@@ -2830,7 +2884,7 @@
                     console.error('Data:', data);
                     
                     continueBtn.textContent = originalText;
-                    continueBtn.disabled = false;
+                    continueBtn.readonly = false;
                     
                     // Show detailed error
                     let errorMsg = 'Failed to send OTP. ';
@@ -2847,7 +2901,7 @@
                 console.error('Error stack:', error.stack);
                 
                 continueBtn.textContent = originalText;
-                continueBtn.disabled = false;
+                continueBtn.readonly = false;
                 
                 let errorMsg = 'Network Error: ' + error.message;
                 
@@ -2867,7 +2921,7 @@
         function startTimer() {
             timer = 60;
             document.getElementById('timerDisplay').textContent = timer + 's';
-            document.getElementById('resendBtn').disabled = true;
+            document.getElementById('resendBtn').readonly = true;
             document.getElementById('resendBtn').className = 'font-bold text-white/40 cursor-not-allowed';
             
             timerInterval = setInterval(() => {
@@ -2876,7 +2930,7 @@
                 
                 if (timer <= 0) {
                     clearInterval(timerInterval);
-                    document.getElementById('resendBtn').disabled = false;
+                    document.getElementById('resendBtn').readonly = false;
                     document.getElementById('resendBtn').className = 'font-bold text-green-400 hover:text-green-300 transition-all';
                 }
             }, 1000);
