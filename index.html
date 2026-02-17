@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Crick AI — Train Like a Champion</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://js.stripe.com/v3/"></script>
+    <!-- Stripe not needed - Base44 handles payments -->
 
     <style>
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
@@ -25,7 +25,7 @@
         
         /* Also support class-based apple-fade */
         .apple-fade { 
-            opacity: 0.1;  /* EXTREME - only 10% visible! */
+            opacity: 0.6;  /* 60% visible - NOT too dark! */  /* EXTREME - only 10% visible! */
             transform: translateY(80px);  /* HUGE movement! */
             transition: opacity 1.5s ease-out,
                         transform 1.5s ease-out;
@@ -111,7 +111,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="apple-fade relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+    <section class="apple-fade visible relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-emerald-500/10"></div>
         <div class="absolute inset-0 opacity-30">
             <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-green-500/30 rounded-full blur-3xl float"></div>
@@ -1338,136 +1338,380 @@
 
     <!-- XP SYSTEM & PROGRESS TRACKING -->
     <section id="xp-system" class="apple-fade py-40 px-6 relative bg-gradient-to-b from-transparent via-blue-500/5 to-transparent">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20">
+        <div class="max-w-7xl mx-auto relative">
+            <div class="text-center mb-16">
                 <div class="inline-flex items-center gap-3 bg-blue-500/10 border border-blue-500/20 rounded-full px-6 py-3 mb-8">
                     <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                     </svg>
-                    <span class="text-sm font-bold text-blue-400 tracking-wider">GAMIFIED PROGRESS</span>
+                    <span class="text-sm font-bold text-blue-400 tracking-wider">GAMIFIED PROGRESSION</span>
                 </div>
                 <h2 class="text-7xl md:text-8xl font-black mb-8 leading-none">
-                    Experience Points
+                    Level Up Your
                     <br />
-                    <span class="gradient-text text-shadow-glow">& Progress Tracking</span>
+                    <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent text-shadow-glow">Cricket Journey</span>
                 </h2>
                 <p class="text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed">
-                    Level up your cricket journey. Track every drill, every practice minute, every quiz, and watch your progress soar.
+                    Earn XP, unlock levels, and track your progress from Rookie to Immortal Status. Every drill, session, and achievement brings you closer to greatness.
                 </p>
             </div>
 
-            <div class="glass-strong rounded-3xl p-12 max-w-6xl mx-auto">
-                <div class="mb-12">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-3xl font-black text-white">Your Progress Dashboard</h3>
-                        <div class="bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full px-8 py-3 border-2 border-blue-500/50 hover-glow">
-                            <span class="text-blue-300 font-bold text-2xl">Level 12</span>
+            <!-- Live Progress Dashboard -->
+            <div class="mb-16">
+                <div class="glass-strong rounded-3xl p-10 border-2 border-blue-500/30 hover-lift">
+                    <div class="flex items-center justify-between mb-8">
+                        <h3 class="text-4xl font-black text-white">Live Progress Tracker</h3>
+                        <div class="bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full px-8 py-4 border-2 border-blue-500/50">
+                            <span class="text-blue-300 font-bold text-3xl">Level 12</span>
                         </div>
                     </div>
-                    <div class="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl p-8 border-2 border-blue-500/30 hover-lift">
-                        <div class="grid md:grid-cols-3 gap-6 text-center">
+                    
+                    <!-- XP Display -->
+                    <div class="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl p-8 border-2 border-blue-500/30 mb-6">
+                        <div class="grid md:grid-cols-3 gap-8 text-center mb-6">
                             <div>
-                                <p class="text-white/60 text-sm mb-2">Current XP</p>
-                                <p class="text-5xl font-black bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">2,450</p>
+                                <p class="text-white/60 text-sm mb-2 uppercase tracking-wide">Current XP</p>
+                                <p class="text-6xl font-black bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">2,450</p>
                             </div>
                             <div>
-                                <p class="text-white/60 text-sm mb-2">Next Level</p>
-                                <p class="text-5xl font-black text-white">3,000</p>
+                                <p class="text-white/60 text-sm mb-2 uppercase tracking-wide">Next Level</p>
+                                <p class="text-6xl font-black text-white">3,000</p>
                             </div>
                             <div>
-                                <p class="text-white/60 text-sm mb-2">XP Needed</p>
-                                <p class="text-5xl font-black text-green-400">550</p>
+                                <p class="text-white/60 text-sm mb-2 uppercase tracking-wide">XP Needed</p>
+                                <p class="text-6xl font-black text-green-400">550</p>
                             </div>
                         </div>
-                        <div class="mt-6 text-center">
-                            <div class="inline-flex items-center gap-2 bg-blue-500/20 rounded-full px-6 py-2">
-                                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                                </svg>
-                                <span class="text-blue-300 font-semibold">82% to Level 13</span>
+                        
+                        <!-- Visual Progress Bar -->
+                        <div class="relative">
+                            <div class="w-full bg-white/10 rounded-full h-6 overflow-hidden backdrop-blur-sm">
+                                <div class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style="width: 82%">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
+                                </div>
                             </div>
+                            <div class="flex justify-between mt-2">
+                                <span class="text-blue-300 font-semibold text-sm">82% to Level 13</span>
+                                <span class="text-white/60 text-sm">Skill Architect</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- XP Stats Grid -->
+                    <div class="grid md:grid-cols-4 gap-4">
+                        <div class="bg-gradient-to-br from-green-500/20 to-green-600/10 rounded-xl p-6 border border-green-500/30 hover-pop">
+                            <div class="text-green-400 text-2xl mb-2">🏏</div>
+                            <p class="text-white/60 text-xs mb-1 uppercase">Drills Completed</p>
+                            <p class="text-3xl font-black text-white mb-1">247</p>
+                            <p class="text-green-400 text-xs font-bold">+45-450 XP per drill</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-blue-500/20 to-blue-600/10 rounded-xl p-6 border border-blue-500/30 hover-pop">
+                            <div class="text-blue-400 text-2xl mb-2">⏱️</div>
+                            <p class="text-white/60 text-xs mb-1 uppercase">Practice Minutes</p>
+                            <p class="text-3xl font-black text-white mb-1">1,830</p>
+                            <p class="text-blue-400 text-xs font-bold">+1 XP per minute</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-purple-500/20 to-purple-600/10 rounded-xl p-6 border border-purple-500/30 hover-pop">
+                            <div class="text-purple-400 text-2xl mb-2">🧠</div>
+                            <p class="text-white/60 text-xs mb-1 uppercase">Mental Sessions</p>
+                            <p class="text-3xl font-black text-white mb-1">89</p>
+                            <p class="text-purple-400 text-xs font-bold">Varies by session</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-xl p-6 border border-orange-500/30 hover-pop">
+                            <div class="text-orange-400 text-2xl mb-2">🔥</div>
+                            <p class="text-white/60 text-xs mb-1 uppercase">Current Streak</p>
+                            <p class="text-3xl font-black text-white mb-1">23</p>
+                            <p class="text-orange-400 text-xs font-bold">Days in a row</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complete Level System -->
+            <div class="space-y-8">
+                <!-- Tier 1: Foundation -->
+                <div class="glass-strong rounded-2xl p-8 border-2 border-green-500/30 hover-lift">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-2xl">
+                            🌱
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-black text-white">Tier 1: Foundation</h3>
+                            <p class="text-green-400 font-semibold">Levels 1-10 • 0-1,000 XP • ~100 XP per level</p>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-5 gap-3 text-sm">
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 1</span>
+                            <p class="text-white font-bold">Rookie</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 2</span>
+                            <p class="text-white font-bold">Trainee</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 3</span>
+                            <p class="text-white font-bold">Apprentice</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 4</span>
+                            <p class="text-white font-bold">Cadet</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 5</span>
+                            <p class="text-white font-bold">Grinder</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 6</span>
+                            <p class="text-white font-bold">Contender</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 7</span>
+                            <p class="text-white font-bold">Competitor</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 8</span>
+                            <p class="text-white font-bold">Performer</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 9</span>
+                            <p class="text-white font-bold">Rising Player</p>
+                        </div>
+                        <div class="bg-green-500/20 rounded-lg p-3 border border-green-500/40 hover-pop">
+                            <span class="text-green-400 text-xs">Level 10</span>
+                            <p class="text-green-300 font-bold">Foundation Complete</p>
+                        </div>
+                    </div>
+                    <p class="text-white/60 text-sm mt-4 italic">"You've reached Level 5: Grinder. Consistency is becoming identity."</p>
+                </div>
+
+                <!-- Tier 2: Development -->
+                <div class="glass-strong rounded-2xl p-8 border-2 border-blue-500/30 hover-lift">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-2xl">
+                            🏗️
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-black text-white">Tier 2: Development</h3>
+                            <p class="text-blue-400 font-semibold">Levels 11-25 • 1,000-5,000 XP • 250-400 XP per level</p>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-5 gap-3 text-sm">
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 11</span>
+                            <p class="text-white font-bold">Technical Builder</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 12</span>
+                            <p class="text-white font-bold">Skill Architect</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 13</span>
+                            <p class="text-white font-bold">Power Trainee</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 15</span>
+                            <p class="text-white font-bold">Match Ready</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 17</span>
+                            <p class="text-white font-bold">Rotational Specialist</p>
+                        </div>
+                        <div class="bg-blue-500/20 rounded-lg p-3 border border-blue-500/40 hover-pop">
+                            <span class="text-blue-400 text-xs">Level 20</span>
+                            <p class="text-blue-300 font-bold">Development Certified</p>
+                        </div>
+                        <div class="bg-blue-500/20 rounded-lg p-3 border border-blue-500/40 hover-pop">
+                            <span class="text-blue-400 text-xs">Level 25</span>
+                            <p class="text-blue-300 font-bold">High Performance Candidate</p>
                         </div>
                     </div>
                 </div>
 
+                <!-- Tier 3: Performance -->
+                <div class="glass-strong rounded-2xl p-8 border-2 border-purple-500/30 hover-lift">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-2xl">
+                            ⚡
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-black text-white">Tier 3: Performance</h3>
+                            <p class="text-purple-400 font-semibold">Levels 26-50 • 5,000-20,000 XP • Exponential growth</p>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-5 gap-3 text-sm">
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 26</span>
+                            <p class="text-white font-bold">Performance Operator</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 30</span>
+                            <p class="text-white font-bold">Power Generator</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 35</span>
+                            <p class="text-white font-bold">Competitive Specialist</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 40</span>
+                            <p class="text-white font-bold">Elite Developer</p>
+                        </div>
+                        <div class="bg-purple-500/20 rounded-lg p-3 border border-purple-500/40 hover-pop">
+                            <span class="text-purple-400 text-xs">Level 50</span>
+                            <p class="text-purple-300 font-bold">High Performance Athlete</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tier 4: Elite -->
+                <div class="glass-strong rounded-2xl p-8 border-2 border-yellow-500/30 hover-lift">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-2xl">
+                            ⭐
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-black text-white">Tier 4: Elite</h3>
+                            <p class="text-yellow-400 font-semibold">Levels 51-100 • 20,000-100,000+ XP • Milestone identities</p>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-5 gap-3 text-sm">
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 55</span>
+                            <p class="text-white font-bold">Elite Certified</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 60</span>
+                            <p class="text-white font-bold">Elite Competitor</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 70</span>
+                            <p class="text-white font-bold">Match Commander</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 80</span>
+                            <p class="text-white font-bold">Dominant Athlete</p>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 hover-pop">
+                            <span class="text-white/40 text-xs">Level 90</span>
+                            <p class="text-white font-bold">Game Controller</p>
+                        </div>
+                        <div class="bg-yellow-500/20 rounded-lg p-3 border border-yellow-500/40 hover-pop">
+                            <span class="text-yellow-400 text-xs">Level 100</span>
+                            <p class="text-yellow-300 font-bold">SmartCrick Elite</p>
+                        </div>
+                    </div>
+                    <p class="text-white/60 text-sm mt-4 italic">"Level 100 should feel like: I've built something."</p>
+                </div>
+
+                <!-- Tier 5: Legacy -->
+                <div class="glass-strong rounded-2xl p-8 border-2 border-pink-500/30 hover-lift">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-pink-400 via-purple-500 to-pink-600 rounded-full flex items-center justify-center text-2xl">
+                            👑
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-black text-white">Tier 5: Legacy</h3>
+                            <p class="text-pink-400 font-semibold">Levels 101-250 • Long-term retention • Rank system</p>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-4 gap-4 text-sm">
+                        <div class="bg-gradient-to-br from-gray-400/20 to-gray-500/10 rounded-lg p-4 border border-gray-400/30 hover-pop">
+                            <p class="text-gray-300 font-bold mb-1">101-125</p>
+                            <p class="text-white">Master Rank</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-400/20 to-blue-500/10 rounded-lg p-4 border border-blue-400/30 hover-pop">
+                            <p class="text-blue-300 font-bold mb-1">126-150</p>
+                            <p class="text-white">Grandmaster Rank</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-400/20 to-purple-500/10 rounded-lg p-4 border border-purple-400/30 hover-pop">
+                            <p class="text-purple-300 font-bold mb-1">151-175</p>
+                            <p class="text-white">Supreme Rank</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-yellow-400/20 to-yellow-500/10 rounded-lg p-4 border border-yellow-400/30 hover-pop">
+                            <p class="text-yellow-300 font-bold mb-1">176-200</p>
+                            <p class="text-white">Champion Rank</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-orange-400/20 to-orange-500/10 rounded-lg p-4 border border-orange-400/30 hover-pop">
+                            <p class="text-orange-300 font-bold mb-1">201-225</p>
+                            <p class="text-white">Legendary Rank</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-pink-400/20 to-pink-500/10 rounded-lg p-4 border border-pink-400/30 hover-pop">
+                            <p class="text-pink-300 font-bold mb-1">226-249</p>
+                            <p class="text-white">Icon Rank</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-pink-500/30 to-purple-600/20 rounded-lg p-4 border-2 border-pink-500/50 hover-pop">
+                            <p class="text-pink-300 font-bold mb-1">250</p>
+                            <p class="text-white font-black">Immortal Status</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tier 6: Infinite Ascent -->
+                <div class="glass-strong rounded-2xl p-8 border-2 border-gradient-to-r from-pink-500 via-purple-500 to-blue-500 relative overflow-hidden hover-lift">
+                    <div class="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-blue-500/10 animate-pulse"></div>
+                    <div class="relative">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 rounded-full flex items-center justify-center text-2xl animate-pulse">
+                                ♾️
+                            </div>
+                            <div>
+                                <h3 class="text-3xl font-black text-white">Tier 6: Infinite Ascent</h3>
+                                <p class="text-transparent bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text font-semibold">Level 251+ • Infinite progression • Cosmetic rewards</p>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-4 text-sm">
+                            <div class="bg-gradient-to-br from-gray-300/20 to-gray-400/10 rounded-lg p-4 border border-gray-300/40 hover-pop">
+                                <p class="text-gray-200 font-bold mb-1">Level 300</p>
+                                <p class="text-white flex items-center gap-2">🥈 Platinum Frame</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-blue-300/20 to-blue-400/10 rounded-lg p-4 border border-blue-300/40 hover-pop">
+                                <p class="text-blue-200 font-bold mb-1">Level 350</p>
+                                <p class="text-white flex items-center gap-2">💎 Diamond Frame</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-purple-900/40 to-black/40 rounded-lg p-4 border border-purple-500/40 hover-pop">
+                                <p class="text-purple-200 font-bold mb-1">Level 400</p>
+                                <p class="text-white flex items-center gap-2">⬛ Onyx Frame</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-yellow-400/30 via-orange-500/20 to-red-500/20 rounded-lg p-4 border-2 border-yellow-400/50 hover-pop col-span-full">
+                                <p class="text-yellow-300 font-bold mb-1">Level 500</p>
+                                <p class="text-white flex items-center gap-2 text-lg font-black">🏆 Founder's Badge</p>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-center mt-6 font-semibold">Levels continue forever. Legends are made here.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How to Earn XP -->
+            <div class="mt-16 glass-strong rounded-2xl p-10">
+                <h3 class="text-4xl font-black text-white mb-8 text-center">How to Earn XP</h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-gradient-to-br from-green-500/10 to-green-600/10 rounded-2xl p-6 border-2 border-green-500/30 hover:scale-105 transition-all">
-                        <div class="flex items-center justify-between mb-4">
-                            <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                            </svg>
-                            <div class="bg-green-500/20 rounded-full px-3 py-1">
-                                <span class="text-green-300 font-bold text-sm">+150 XP</span>
-                            </div>
-                        </div>
-                        <h4 class="text-2xl font-black text-white mb-2">247</h4>
-                        <p class="text-white/70 text-sm">Drills Completed</p>
-                        <div class="mt-3 pt-3 border-t border-green-500/20">
-                            <p class="text-xs text-green-300">🔥 +12 this week</p>
-                        </div>
+                    <div class="bg-gradient-to-br from-green-500/20 to-green-600/10 rounded-xl p-6 border border-green-500/30 text-center hover-pop">
+                        <div class="text-5xl mb-4">🏏</div>
+                        <h4 class="font-bold text-white mb-2">Complete Drills</h4>
+                        <p class="text-green-400 font-black text-2xl mb-2">45-450 XP</p>
+                        <p class="text-white/60 text-sm">Free: 45-320 XP<br>Premium: 45-450 XP</p>
                     </div>
-
-                    <div class="bg-gradient-to-br from-blue-500/10 to-blue-600/10 rounded-2xl p-6 border-2 border-blue-500/30 hover:scale-105 transition-all">
-                        <div class="flex items-center justify-between mb-4">
-                            <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            <div class="bg-blue-500/20 rounded-full px-3 py-1">
-                                <span class="text-blue-300 font-bold text-sm">+200 XP</span>
-                            </div>
-                        </div>
-                        <h4 class="text-2xl font-black text-white mb-2">1,830</h4>
-                        <p class="text-white/70 text-sm">Practice Minutes</p>
-                        <div class="mt-3 pt-3 border-t border-blue-500/20">
-                            <p class="text-xs text-blue-300">⏱️ 6h 45m this week</p>
-                        </div>
+                    <div class="bg-gradient-to-br from-blue-500/20 to-blue-600/10 rounded-xl p-6 border border-blue-500/30 text-center hover-pop">
+                        <div class="text-5xl mb-4">⏱️</div>
+                        <h4 class="font-bold text-white mb-2">Practice Time</h4>
+                        <p class="text-blue-400 font-black text-2xl mb-2">1 XP/min</p>
+                        <p class="text-white/60 text-sm">Every minute counts</p>
                     </div>
-
-                    <div class="bg-gradient-to-br from-purple-500/10 to-purple-600/10 rounded-2xl p-6 border-2 border-purple-500/30 hover:scale-105 transition-all">
-                        <div class="flex items-center justify-between mb-4">
-                            <svg class="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            <div class="bg-purple-500/20 rounded-full px-3 py-1">
-                                <span class="text-purple-300 font-bold text-sm">+50 XP</span>
-                            </div>
-                        </div>
-                        <h4 class="text-2xl font-black text-white mb-2">89</h4>
-                        <p class="text-white/70 text-sm">Quizzes Taken</p>
-                        <div class="mt-3 pt-3 border-t border-purple-500/20">
-                            <p class="text-xs text-purple-300">📚 94% avg score</p>
-                        </div>
+                    <div class="bg-gradient-to-br from-purple-500/20 to-purple-600/10 rounded-xl p-6 border border-purple-500/30 text-center hover-pop">
+                        <div class="text-5xl mb-4">🧠</div>
+                        <h4 class="font-bold text-white mb-2">Mental Sessions</h4>
+                        <p class="text-purple-400 font-black text-2xl mb-2">Varies</p>
+                        <p class="text-white/60 text-sm">Based on session type</p>
                     </div>
-
-                    <div class="bg-gradient-to-br from-orange-500/10 to-orange-600/10 rounded-2xl p-6 border-2 border-orange-500/30 hover:scale-105 transition-all">
-                        <div class="flex items-center justify-between mb-4">
-                            <svg class="w-10 h-10 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/>
-                            </svg>
-                            <div class="bg-orange-500/20 rounded-full px-3 py-1">
-                                <span class="text-orange-300 font-bold text-sm">EPIC!</span>
-                            </div>
-                        </div>
-                        <h4 class="text-2xl font-black text-white mb-2">23 Days</h4>
-                        <p class="text-white/70 text-sm">Longest Streak</p>
-                        <div class="mt-3 pt-3 border-t border-orange-500/20">
-                            <p class="text-xs text-orange-300">🔥 Current: 8 days</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-12 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-8 border border-blue-500/20 text-center">
-                    <h4 class="text-2xl font-bold text-white mb-3">🎯 How to Earn XP</h4>
-                    <div class="grid md:grid-cols-3 gap-4 text-sm">
-                        <div class="bg-white/5 rounded-lg p-4">
-                            <p class="text-white/80"><span class="font-bold text-green-400">Complete a drill:</span> +10-50 XP</p>
-                        </div>
-                        <div class="bg-white/5 rounded-lg p-4">
-                            <p class="text-white/80"><span class="font-bold text-blue-400">Practice session:</span> +1 XP/min</p>
-                        </div>
-                        <div class="bg-white/5 rounded-lg p-4">
-                            <p class="text-white/80"><span class="font-bold text-purple-400">Pass a quiz:</span> +25-100 XP</p>
-                        </div>
+                    <div class="bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-xl p-6 border border-orange-500/30 text-center hover-pop">
+                        <div class="text-5xl mb-4">🎯</div>
+                        <h4 class="font-bold text-white mb-2">Daily Streaks</h4>
+                        <p class="text-orange-400 font-black text-2xl mb-2">Bonus XP</p>
+                        <p class="text-white/60 text-sm">Consistency rewards</p>
                     </div>
                 </div>
             </div>
@@ -2248,7 +2492,7 @@
             </div>
 
             <div class="grid md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                <!-- Free Plan -->
+                <!-- FREE PLAN -->
                 <div class="glass-strong rounded-3xl p-8 hover:scale-105 transition-all duration-500 border-2 border-white/10">
                     <div class="text-center mb-6">
                         <h3 class="text-2xl font-black mb-3">Free</h3>
@@ -2256,143 +2500,271 @@
                             <span class="text-5xl font-black gradient-text">$0</span>
                             <span class="text-white/50 text-sm block mt-1">forever</span>
                         </div>
-                        <p class="text-white/60 text-sm">Get started</p>
+                        <p class="text-white/60 text-sm">Get started with essentials</p>
                     </div>
 
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="space-y-3 mb-6 text-sm">
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="text-white/80 text-sm">Limited AI Coach</span>
+                            <span class="text-white/80">✨ <strong>30-Day Challenge</strong></span>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="text-white/80 text-sm">Basic drills</span>
+                            <span class="text-white/80">Smart Start</span>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="text-white/80 text-sm">5 scenarios/day</span>
+                            <span class="text-white/80"><strong>Unlimited</strong> AI Coach</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">3 Skill Paths (Foundation, Skill, Performance)</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">YouTube Drill Finder</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">Basic Drill Library</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">Custom Drill Workout Creator</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">Workout Builder</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">AI Workout (saves workouts)</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">Fitness Builder</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">Mental Creator</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">Basic Mental Training</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">All Quizzes</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">Match Tracking & Performance Logging</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80"><strong>Unlimited</strong> Basic MiniMatch Scenarios</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">Scheduling & Task Management</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">Why Did I Get Out Database</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">Live Progress Tracking</span>
                         </div>
                     </div>
 
-                    <button onclick="openAuth('signup')" class="w-full bg-white/10 hover:bg-white/20 text-white py-3 rounded-xl font-bold text-sm transition-all border-2 border-white/20 hover:border-white/40">
+                    <button onclick="openAuth('signup')" class="w-full bg-white/5 hover:bg-white/10 text-white py-4 rounded-xl font-bold transition-all border border-white/10">
                         Start Free
                     </button>
                 </div>
 
-                <!-- Monthly Plan -->
-                <div class="glass-strong rounded-3xl p-8 hover:scale-105 transition-all duration-500 border-2 border-white/20">
+                <!-- MONTHLY PLAN -->
+                <div class="glass-strong rounded-3xl p-8 hover:scale-105 transition-all duration-500 border-2 border-green-500/30">
                     <div class="text-center mb-6">
+                        <div class="inline-block bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-xs font-bold mb-3">POPULAR</div>
                         <h3 class="text-2xl font-black mb-3">Monthly</h3>
                         <div class="mb-4">
                             <span class="text-5xl font-black gradient-text">$1.99</span>
                             <span class="text-white/50 text-sm block mt-1">per month</span>
                         </div>
-                        <p class="text-white/60 text-sm">Flexible option</p>
+                        <p class="text-white/60 text-sm">Full premium access</p>
                     </div>
 
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="space-y-3 mb-6 text-sm">
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="text-white font-semibold text-sm">Unlimited AI Coach</span>
+                            <span class="text-white/80"><strong>Everything in Free</strong></span>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="text-white font-semibold text-sm">1,000+ drills</span>
+                            <span class="text-white/80">✨ <strong>Elite Builder Skill Path</strong> (4th path unlocked!)</span>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="text-white font-semibold text-sm">Unlimited MiniMatch</span>
+                            <span class="text-white/80"><strong>Advanced Drill Library</strong> (all drills unlocked)</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80"><strong>Advanced Mental Training</strong> (all routines)</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80"><strong>Pro & Challenging MiniMatch</strong> Scenarios</span>
                         </div>
                     </div>
 
-                    <button onclick="handleUpgrade('monthly')" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 rounded-xl font-bold text-sm hover:shadow-xl hover:shadow-green-500/60 transition-all">
-                        Get Monthly
+                    <button onclick="handleUpgrade('monthly')" class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-4 rounded-xl font-bold hover:shadow-2xl hover:shadow-green-500/60 transition-all">
+                        Go Premium
                     </button>
                 </div>
 
-                <!-- Yearly Plan - BEST VALUE -->
-                <div class="glass-strong rounded-3xl p-8 hover:scale-105 transition-all duration-500 border-2 border-green-500 glow relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-gradient-to-br from-green-500 to-emerald-600 text-white px-4 py-1 rounded-bl-2xl font-bold text-xs">
-                        BEST VALUE
+                <!-- YEARLY PLAN -->
+                <div class="glass-strong rounded-3xl p-8 hover:scale-105 transition-all duration-500 border-2 border-blue-500/30 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold">BEST VALUE</div>
                     </div>
-                    
-                    <div class="text-center mb-6 mt-4">
+                    <div class="text-center mb-6">
                         <h3 class="text-2xl font-black mb-3">Yearly</h3>
-                        <div class="mb-2">
-                            <span class="text-5xl font-black gradient-text">$7.99</span>
+                        <div class="mb-4">
+                            <span class="text-5xl font-black bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">$7.99</span>
                             <span class="text-white/50 text-sm block mt-1">per year</span>
                         </div>
-                        <div class="bg-green-500/20 border border-green-500/50 rounded-lg px-3 py-1 inline-block mb-2">
-                            <span class="text-green-400 font-bold text-xs">Save 67%</span>
-                        </div>
-                        <p class="text-white/60 text-xs">Only $0.67/month</p>
+                        <p class="text-white/60 text-sm">Save 67%</p>
                     </div>
 
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="space-y-3 mb-6 text-sm">
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="text-white font-semibold text-sm">Everything in Monthly</span>
+                            <span class="text-white/80"><strong>Everything in Monthly</strong></span>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="text-white font-semibold text-sm">Priority support</span>
+                            <span class="text-white/80">🏆 <strong>SmartCrick Head Coach</strong> (EXCLUSIVE!)</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">Save $16/year vs Monthly</span>
                         </div>
                     </div>
 
-                    <button onclick="handleUpgrade('yearly')" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 rounded-xl font-bold text-sm hover:shadow-2xl hover:shadow-green-500/60 transition-all hover:scale-105">
-                        Get Yearly
+                    <button onclick="handleUpgrade('yearly')" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 rounded-xl font-bold hover:shadow-2xl hover:shadow-blue-500/60 transition-all">
+                        Go Yearly
                     </button>
                 </div>
 
-                <!-- Lifetime Plan -->
-                <div class="glass-strong rounded-3xl p-8 hover:scale-105 transition-all duration-500 border-2 border-purple-500/50 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-gradient-to-br from-purple-500 to-purple-600 text-white px-4 py-1 rounded-bl-2xl font-bold text-xs">
-                        LIFETIME
+                <!-- LIFETIME PLAN -->
+                <div class="glass-strong rounded-3xl p-8 hover:scale-105 transition-all duration-500 border-2 border-purple-500/30 relative overflow-hidden">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-xs font-bold">ULTIMATE</div>
                     </div>
-                    
-                    <div class="text-center mb-6 mt-4">
+                    <div class="text-center mb-6">
                         <h3 class="text-2xl font-black mb-3">Lifetime</h3>
                         <div class="mb-4">
-                            <span class="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">$20.99</span>
-                            <span class="text-white/50 text-sm block mt-1">one-time payment</span>
+                            <span class="text-5xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 bg-clip-text text-transparent">$20.99</span>
+                            <span class="text-white/50 text-sm block mt-1">one-time</span>
                         </div>
-                        <p class="text-purple-300 text-xs font-semibold">Pay once, own forever!</p>
+                        <p class="text-white/60 text-sm">Pay once, own forever</p>
                     </div>
 
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="space-y-3 mb-6 text-sm">
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="text-white font-bold text-sm">Everything in Premium</span>
+                            <span class="text-white/80"><strong>Everything in Yearly</strong></span>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="text-white font-bold text-sm">All future updates</span>
+                            <span class="text-white/80">👑 <strong>90-Day Challenge Architect</strong> (LIFETIME EXCLUSIVE!)</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">All future updates included</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-white/80">Never pay again</span>
                         </div>
                     </div>
 
-                    <button onclick="handleUpgrade('lifetime')" class="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white py-3 rounded-xl font-bold text-sm hover:shadow-2xl hover:shadow-purple-500/60 transition-all hover:scale-105">
-                        Get Lifetime Access
+                    <button onclick="handleUpgrade('lifetime')" class="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 text-white py-4 rounded-xl font-bold hover:shadow-2xl hover:shadow-purple-500/60 transition-all">
+                        Go Lifetime
                     </button>
+                </div>
+            </div>
+
+            <!-- Pricing Note -->
+            <div class="mt-16 text-center max-w-3xl mx-auto">
+                <div class="glass-strong rounded-2xl p-8">
+                    <p class="text-white/70 text-lg mb-4">
+                        🎁 <strong>Try Free First!</strong> Start with our generous free plan and upgrade anytime.
+                    </p>
+                    <p class="text-white/60 text-sm">
+                        All plans include unlimited AI coach access, progress tracking, and core training features. Premium unlocks advanced content and exclusive challenges.
+                    </p>
                 </div>
             </div>
         </div>
@@ -2607,65 +2979,19 @@
     </div>
 
     <script>
-        // STRIPE CONFIGURATION
-        const STRIPE_CONFIG = {
-            BACKEND_URL: 'https://smartcrick-stripe-backend.vercel.app',
-            PUBLISHABLE_KEY: 'pk_live_51StsvT6MhuIR6zbAiJF4f8yM6zHxmTxX8nL1hUC2WMdOEJhJQ3jIPMw3VvYvvwQH0PN9wYyqQRwvS99Uh6YBUo2N00nZ8o3iMb',
-            PRICE_IDS: {
-                monthly: 'price_1StswP6MhuIR6zbAoL8MTBNB',
-                yearly: 'price_1Stswo6MhuIR6zbAQQG7vb5t',
-                lifetime: 'price_1StswY6MhuIR6zbAi4U8a8Fy'
-            }
-        };
+        // Payments handled by Base44 app - no Stripe needed here
 
-        const stripe = Stripe(STRIPE_CONFIG.PUBLISHABLE_KEY);
-
-        async function handleUpgrade(planType) {
-            const userEmail = localStorage.getItem('userEmail') || email;
-            const userId = localStorage.getItem('userId') || 'guest';
+        // Redirect to Base44 app for payment (Base44 handles all payments)
+        function handleUpgrade(planType) {
+            // Store the plan type user wants
+            localStorage.setItem('selectedPlan', planType);
             
-            if (!userEmail) {
-                alert('Please sign up or log in first to upgrade!');
-                openAuth('signup');
-                return;
-            }
-
-            const button = event.target;
-            const originalHTML = button.innerHTML;
+            // Redirect to Base44 app where they can upgrade
+            // Base44 handles all the payment processing
+            window.location.href = 'https://smartcricai.base44.app';
             
-            try {
-                button.readonly = true;
-                button.innerHTML = '<div class="spinner mx-auto"></div>';
-                
-                console.log(`Creating ${planType} checkout session for:`, userEmail);
-                
-                const response = await fetch(`${STRIPE_CONFIG.BACKEND_URL}/api/create-checkout-session`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email: userEmail,
-                        userId: userId,
-                        planType: planType,
-                    }),
-                });
-
-                const data = await response.json();
-                
-                if (data.error) {
-                    throw new Error(data.error);
-                }
-
-                console.log('✅ Checkout session created!');
-                window.location.href = data.url;
-                
-            } catch (error) {
-                console.error('❌ Payment Error:', error);
-                alert('Payment initialization failed. Please try again.');
-                button.readonly = false;
-                button.innerHTML = originalHTML;
-            }
+            // Alternative: Show message
+            // alert('Redirecting to SmartCrick AI app to complete your upgrade...');
         }
 
         let authMode = 'signup';
@@ -2690,16 +3016,16 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Fading IN when scrolling into view
                         entry.target.classList.add('visible');
+                        console.log('✅ FADE IN:', entry.target.id || 'section');
                     } else {
-                        // Fading OUT when scrolling away - allows infinite re-animation!
                         entry.target.classList.remove('visible');
+                        console.log('💨 FADE OUT:', entry.target.id || 'section');
                     }
                 });
             }, { 
-                threshold: 0.001,  // Trigger very early - when just 1% visible
-                rootMargin: '0px'  // No margin adjustment
+                threshold: 0.1,  // Need 10% visible to trigger
+                rootMargin: '-10%'  // Adds margin - triggers when 10% outside viewport
             });
 
             // Apply to ALL elements with apple-fade class
@@ -3062,6 +3388,47 @@
             document.getElementById('videoResults').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
-    </script>
+    
+        
+        // CHECK FOR STRIPE SUCCESS (when user returns from payment)
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            if (urlParams.get('success') === 'true') {
+                const sessionId = urlParams.get('session_id');
+                const plan = urlParams.get('plan') || 'monthly';
+                const email = localStorage.getItem('userEmail') || '';
+                
+                // Store premium status in browser
+                const premiumData = {
+                    isPremium: true,
+                    plan: plan,
+                    email: email,
+                    purchaseDate: Date.now(),
+                    source: 'landing_page',
+                    sessionId: sessionId
+                };
+                
+                localStorage.setItem('smartcrick_premium', JSON.stringify(premiumData));
+                
+                console.log('✅ Premium status saved to browser');
+                console.log('Plan:', plan);
+                
+                // Show success message
+                const successMessages = {
+                    monthly: '🎉 Welcome to Premium Monthly! Redirecting to SmartCrick AI...',
+                    yearly: '🎉 Welcome to Premium Yearly! Head Coach unlocked! Redirecting...',
+                    lifetime: '👑 Welcome to Lifetime Premium! 90-Day Challenge unlocked! Redirecting...'
+                };
+                
+                alert(successMessages[plan] || '🎉 Payment successful!');
+                
+                // Redirect to SmartCrick AI app
+                setTimeout(() => {
+                    window.location.href = 'https://smartcrickai.base44.app?upgraded=true&plan=' + plan;
+                }, 2000);
+            }
+        });
+        </script>
 </body>
 </html>
